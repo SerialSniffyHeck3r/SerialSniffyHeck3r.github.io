@@ -1,81 +1,49 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>울애기 포트폴리오 - 임베디드 & 음향기기</title>
+  <meta charset="UTF-8" />
+  <title>SerialSniffyHeck3r · Embedded & Reverse Engineering</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body {
+    /* ====== 기본 레이아웃 / 타이포 ====== */
+    :root {
+      --bg: #020617;
+      --bg-alt: #020617;
+      --bg-card: #020617;
+      --border-subtle: #1f2937;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.1);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --muted-strong: #6b7280;
+      --highlight-strong: #f97316;
+      --highlight-soft: rgba(249, 115, 22, 0.12);
+      --radius-lg: 0.75rem;
+      --radius-full: 999px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.65);
+      --max-width: 960px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0f172a;
-      color: #e5e7eb;
     }
 
-    header {
-      padding: 2rem 10%;
-      background: #020617;
-      border-bottom: 1px solid #1f2937;
-    }
-
-    .title {
-      font-size: 2rem;
-      font-weight: 700;
-    }
-
-    .subtitle {
-      margin-top: 0.5rem;
-      color: #9ca3af;
-    }
-
-    main {
-      padding: 2rem 10%;
-    }
-
-    section {
-      margin-bottom: 2.5rem;
-    }
-
-    h2 {
-      font-size: 1.4rem;
-      margin-bottom: 0.75rem;
-      border-left: 4px solid #38bdf8;
-      padding-left: 0.5rem;
-    }
-
-    .card {
-      border: 1px solid #1f2937;
-      border-radius: 0.75rem;
-      padding: 1.25rem 1.5rem;
-      background: #020617;
-      margin-bottom: 1rem;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      border: 1px solid #374151;
-      font-size: 0.75rem;
-      margin-right: 0.25rem;
-      margin-top: 0.25rem;
-      color: #9ca3af;
-    }
-
-    .project-title {
-      font-weight: 600;
-      font-size: 1.05rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .project-meta {
-      font-size: 0.85rem;
-      color: #9ca3af;
-      margin-bottom: 0.5rem;
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 42%, #020617 100%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     a {
-      color: #38bdf8;
+      color: var(--accent);
       text-decoration: none;
     }
 
@@ -83,74 +51,741 @@
       text-decoration: underline;
     }
 
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .page {
+        padding: 3.25rem 1.5rem 4rem;
+      }
+    }
+
+    /* ====== 헤더 / 네비 ====== */
+    .site-header {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .site-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 2rem;
+      }
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .name {
+      font-size: clamp(1.5rem, 2vw + 1.1rem, 2.1rem);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .tagline {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .tagline span {
+      color: var(--accent);
+    }
+
+    .quick-meta {
+      font-size: 0.8rem;
+      color: var(--muted-strong);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .nav a {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .nav a:hover {
+      border-color: var(--accent);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    /* ====== 섹션 공통 ====== */
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    section:last-of-type {
+      margin-bottom: 3rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted-strong);
+      margin-bottom: 0.35rem;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title::after {
+      content: "";
+      display: inline-block;
+      flex-shrink: 0;
+      width: 40px;
+      height: 1px;
+      border-radius: 999px;
+      background: linear-gradient(
+        to right,
+        rgba(148, 163, 184, 0.8),
+        rgba(15, 23, 42, 0)
+      );
+    }
+
+    .section-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 40rem;
+    }
+
+    /* ====== 카드 / 기사 ====== */
+    .grid {
+      margin-top: 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        gap: 1.1rem;
+      }
+    }
+
+    .item {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 8px 28px rgba(15, 23, 42, 0.55);
+      padding: 1.1rem 1.2rem;
+      transition: transform 120ms ease-out, box-shadow 120ms ease-out,
+        border-color 120ms ease-out, background 120ms ease-out;
+    }
+
+    .item:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-soft);
+      border-color: rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    .item-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.4rem 0.6rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .item-title {
+      font-size: 0.98rem;
+      font-weight: 550;
+    }
+
+    .item-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .item-body {
+      font-size: 0.88rem;
+      color: #d1d5db;
+      margin-bottom: 0.5rem;
+    }
+
+    .item-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      align-items: center;
+      margin-top: 0.1rem;
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+      color: var(--muted-strong);
+      background: rgba(15, 23, 42, 0.9);
+      white-space: nowrap;
+    }
+
+    .pill-core {
+      border-color: var(--highlight-strong);
+      color: var(--highlight-strong);
+      background: var(--highlight-soft);
+    }
+
+    .pill-major {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .pill-minor {
+      opacity: 0.8;
+    }
+
+    .pill-tag {
+      font-size: 0.7rem;
+      border-style: dashed;
+      opacity: 0.9;
+    }
+
+    .link-inline {
+      font-size: 0.8rem;
+    }
+
+    .link-inline a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.22rem;
+    }
+
+    .link-inline svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    /* ====== 소개 블럭 ====== */
+    .intro-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 1.1rem 1.2rem;
+      max-width: 44rem;
+      box-shadow: 0 6px 22px rgba(15, 23, 42, 0.6);
+      font-size: 0.9rem;
+      color: #d1d5db;
+    }
+
+    .intro-card p {
+      margin: 0 0 0.6rem;
+    }
+
+    .intro-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .code-inline {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 0.8rem;
+      padding: 0.08rem 0.35rem;
+      border-radius: 0.25rem;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: #e5e7eb;
+    }
+
+    /* ====== 푸터 ====== */
     footer {
-      padding: 1.5rem 10%;
-      border-top: 1px solid #1f2937;
-      font-size: 0.85rem;
-      color: #6b7280;
-      text-align: center;
+      margin-top: 2.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+      color: var(--muted-strong);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer a {
+      color: var(--muted);
+    }
+
+    footer a:hover {
+      color: var(--accent);
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="title">울애기 포트폴리오</div>
-    <div class="subtitle">임베디드 · 음향기기 설계 · 졸업 작품</div>
-  </header>
+  <div class="page">
+    <!-- ===== 헤더 / 네비게이션 ===== -->
+    <header class="site-header">
+      <div class="brand-block">
+        <div class="name">SerialSniffyHeck3r</div>
+        <div class="tagline">
+          Embedded systems · Retro hardware · <span>Reverse engineering</span>
+        </div>
+        <div class="quick-meta">
+          Graduation project, hobby hardware, and reverse-engineering notes.
+        </div>
+      </div>
+      <nav class="nav">
+        <!-- 필요 없는 섹션은 이 링크를 지우거나 추가하면 됨 -->
+        <a href="#about">About</a>
+        <a href="#highlights">Highlights</a>
+        <a href="#projects">Projects</a>
+        <a href="#research">Research &amp; Notes</a>
+        <a href="#misc">Misc</a>
+      </nav>
+    </header>
 
-  <main>
+    <!-- ===== 소개 섹션 ===== -->
     <section id="about">
-      <h2>소개</h2>
-      <div class="card">
-        <p>임베디드 시스템, 펌웨어, 그리고 음향기기 설계를 좋아하는 개발자입니다.</p>
-        <p>주로 C/C++, MCU, RTOS, 통신 프로토콜, 오디오 신호 처리 쪽을 다룹니다.</p>
+      <div class="section-label">Overview</div>
+      <h2 class="section-title">About this page</h2>
+      <div class="intro-card">
+        <!-- 여기 내용을 전부 네 소개로 바꾸면 됨 -->
+        <p>
+          This page collects my embedded projects, graduation work, and
+          reverse-engineering writeups. The emphasis is on <strong>how things
+          work internally</strong> – from signal paths on real boards to weird
+          state machines in old games.
+        </p>
+        <p>
+          Most of the content below is organized by importance:
+          <span class="code-inline">Core</span> items are the pieces I would
+          point to in an interview, <span class="code-inline">Major</span> are
+          solid supporting work, and <span class="code-inline">Minor</span> are
+          smaller experiments or side notes.
+        </p>
+        <p>
+          The code lives on GitHub; this page is mainly a structured index and
+          commentary.
+        </p>
       </div>
     </section>
 
+    <!-- ===== 하이라이트 (가장 중요한 것들) ===== -->
+    <section id="highlights">
+      <div class="section-label">Top layer</div>
+      <h2 class="section-title">Highlights</h2>
+      <p class="section-desc">
+        Core pieces I would show first. These are either complete devices or
+        substantial investigations that represent how I think and work.
+      </p>
+
+      <div class="grid">
+        <!-- 예시 1: 졸업작품 / 대표 프로젝트 -->
+        <article class="item">
+          <header class="item-header">
+            <h3 class="item-title">
+              Graduation project – Embedded audio device (working title)
+            </h3>
+            <span class="pill pill-core">Core</span>
+          </header>
+          <div class="item-meta">
+            2024 · STM32 · Audio DSP · Hardware + firmware
+          </div>
+          <div class="item-body">
+            <!-- 요약 문장만 짧게. 자세한 글은 밑 Research 섹션에서 링크해도 됨 -->
+            A full audio device built from scratch – hardware schematic, PCB,
+            enclosure, and firmware. Real-time audio path, metronome, tuner,
+            and practice modes share a common state machine and UI layer.
+          </div>
+          <div class="item-footer">
+            <span class="pill pill-tag">device</span>
+            <span class="pill pill-tag">audio</span>
+            <span class="pill pill-tag">stm32</span>
+            <span class="link-inline">
+              <!-- 깃허브 링크 연결 -->
+              <a href="https://github.com/YOUR_USERNAME/YOUR_REPO" target="_blank" rel="noreferrer">
+                View on GitHub
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M6.75 3a.75.75 0 0 0 0 1.5h3.19L4.22 10.22a.75.75 0 1 0 1.06 1.06L11 5.56v3.19a.75.75 0 0 0 1.5 0V3.75A.75.75 0 0 0 11.75 3h-5z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M3.5 4A1.5 1.5 0 0 0 2 5.5v7A1.5 1.5 0 0 0 3.5 14h7a1.5 1.5 0 0 0 1.5-1.5V9a.75.75 0 0 0-1.5 0v3.25a.25.25 0 0 1-.25.25h-7a.25.25 0 0 1-.25-.25v-7A.25.25 0 0 1 3.5 4h3.25a.75.75 0 0 0 0-1.5H3.5z"
+                  />
+                </svg>
+              </a>
+            </span>
+          </div>
+        </article>
+
+        <!-- 예시 2: 속도계 프로젝트 -->
+        <article class="item">
+          <header class="item-header">
+            <h3 class="item-title">
+              Vehicle GPS speedometer – “I SHOW SPEED”
+            </h3>
+            <span class="pill pill-core">Core</span>
+          </header>
+          <div class="item-meta">
+            2023 · STM32F4 · GPS · Wear-leveled Flash logging
+          </div>
+          <div class="item-body">
+            Stand-alone vehicle speedometer using an STM32F4, GPS receiver, and
+            character LCD. Includes Flash wear-leveling for trip data,
+            adaptive backlight control, and a UI tested on real roads.
+          </div>
+          <div class="item-footer">
+            <span class="pill pill-tag">embedded</span>
+            <span class="pill pill-tag">gps</span>
+            <span class="pill pill-tag">ui</span>
+            <span class="link-inline">
+              <a href="https://github.com/SerialSniffyHeck3r/Simple-Vehicle-Speedometer-I-SHOW-SPEED-based-on-STM32F4-" target="_blank" rel="noreferrer">
+                View on GitHub
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M6.75 3a.75.75 0 0 0 0 1.5h3.19L4.22 10.22a.75.75 0 1 0 1.06 1.06L11 5.56v3.19a.75.75 0 0 0 1.5 0V3.75A.75.75 0 0 0 11.75 3h-5z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M3.5 4A1.5 1.5 0 0 0 2 5.5v7A1.5 1.5 0 0 0 3.5 14h7a1.5 1.5 0 0 0 1.5-1.5V9a.75.75 0 0 0-1.5 0v3.25a.25.25 0 0 1-.25.25h-7a.25.25 0 0 1-.25-.25v-7A.25.25 0 0 1 3.5 4h3.25a.75.75 0 0 0 0-1.5H3.5z"
+                  />
+                </svg>
+              </a>
+            </span>
+          </div>
+        </article>
+
+        <!-- 예시 3: 리버스 엔지니어링 글 -->
+        <article class="item">
+          <header class="item-header">
+            <h3 class="item-title">
+              Notes on KYMCO AK 550 smart key security
+            </h3>
+            <span class="pill pill-core">Core</span>
+          </header>
+          <div class="item-meta">
+            2025 · System analysis · Security design notes
+          </div>
+          <div class="item-body">
+            A structured, high-level analysis of the AK 550 smart-key system:
+            protocol surface, potential replay issues, and how a more robust
+            design could look – without publishing a “how to break it” guide.
+          </div>
+          <div class="item-footer">
+            <span class="pill pill-tag">reverse-engineering</span>
+            <span class="pill pill-tag">security</span>
+            <span class="pill pill-tag">design</span>
+            <span class="link-inline">
+              <a href="/blog/ak550-smart-key-security.html">
+                Read article
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M6.75 3a.75.75 0 0 0 0 1.5h3.19L4.22 10.22a.75.75 0 1 0 1.06 1.06L11 5.56v3.19a.75.75 0 0 0 1.5 0V3.75A.75.75 0 0 0 11.75 3h-5z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M3.5 4A1.5 1.5 0 0 0 2 5.5v7A1.5 1.5 0 0 0 3.5 14h7a1.5 1.5 0 0 0 1.5-1.5V9a.75.75 0 0 0-1.5 0v3.25a.25.25 0 0 1-.25.25h-7a.25.25 0 0 1-.25-.25v-7A.25.25 0 0 1 3.5 4h3.25a.75.75 0 0 0 0-1.5H3.5z"
+                  />
+                </svg>
+              </a>
+            </span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== 프로젝트 계층 구조 ===== -->
     <section id="projects">
-      <h2>프로젝트</h2>
+      <div class="section-label">Projects</div>
+      <h2 class="section-title">Devices &amp; drivers</h2>
+      <p class="section-desc">
+        Hardware-backed work – devices that exist on a bench or in a car, plus
+        reusable drivers for obscure parts. Items are roughly ordered by
+        importance.
+      </p>
 
-      <div class="card">
-        <div class="project-title">졸업 작품 - OO 음향기기 설계</div>
-        <div class="project-meta">
-          기간: 2024.03 ~ 2024.11 · 역할: 시스템 설계 / 하드웨어 / 펌웨어
-        </div>
-        <p>
-          실시간 DSP 기반의 OO용 휴대용 음향기기 설계 및 구현 프로젝트입니다.
-          오디오 코덱, 앰프, 블루투스 모듈을 사용해 하드웨어를 구성하고,
-          MCU 펌웨어에서 실시간 오디오 처리, 제어 로직을 구현했습니다.
-        </p>
-        <p>
-          - 주요 기술: C, RTOS, I2S, I2C, SPI, 오디오 DSP<br>
-          - 하드웨어: MCU, Audio Codec, Class-D Amp, Bluetooth Module 등
-        </p>
-        <p>
-          ▶ GitHub 레포: <a href="https://github.com/SerialSniffyHeck3r/레포이름-여기-나중에-수정">바로가기</a>
-        </p>
-        <div>
-          <span class="tag">Embedded</span>
-          <span class="tag">Audio</span>
-          <span class="tag">Firmware</span>
-          <span class="tag">Hardware</span>
-        </div>
+      <div class="grid">
+        <!-- Major -->
+        <article class="item">
+          <header class="item-header">
+            <h3 class="item-title">
+              TM1622-based LCD module driver
+            </h3>
+            <span class="pill pill-major">Major</span>
+          </header>
+          <div class="item-meta">
+            2023 · STM32 · Bit-banged TM1622 · Reverse-engineered panel
+          </div>
+          <div class="item-body">
+            A complete driver for a cheap TM1622-based segmented LCD module with
+            no proper documentation. Includes GPIO bit-banging, address mapping
+            for all segments, a small ASCII font table, and basic animation
+            support.
+          </div>
+          <div class="item-footer">
+            <span class="pill pill-tag">driver</span>
+            <span class="pill pill-tag">lcd</span>
+            <span class="pill pill-tag">reverse-engineered</span>
+            <span class="link-inline">
+              <a href="https://github.com/SerialSniffyHeck3r/DM8BA10_TM1622_STM32_DRIVER" target="_blank" rel="noreferrer">
+                View on GitHub
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M6.75 3a.75.75 0 0 0 0 1.5h3.19L4.22 10.22a.75.75 0 1 0 1.06 1.06L11 5.56v3.19a.75.75 0 0 0 1.5 0V3.75A.75.75 0 0 0 11.75 3h-5z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M3.5 4A1.5 1.5 0 0 0 2 5.5v7A1.5 1.5 0 0 0 3.5 14h7a1.5 1.5 0 0 0 1.5-1.5V9a.75.75 0 0 0-1.5 0v3.25a.25.25 0 0 1-.25.25h-7a.25.25 0 0 1-.25-.25v-7A.25.25 0 0 1 3.5 4h3.25a.75.75 0 0 0 0-1.5H3.5z"
+                  />
+                </svg>
+              </a>
+            </span>
+          </div>
+        </article>
+
+        <!-- Major -->
+        <article class="item">
+          <header class="item-header">
+            <h3 class="item-title">
+              KODI media box front-panel controller
+            </h3>
+            <span class="pill pill-major">Major</span>
+          </header>
+          <div class="item-meta">
+            Raspberry Pi · C · KODI RPC · Front panel UI
+          </div>
+          <div class="item-body">
+            Front-panel controller for a custom KODI media box – buttons,
+            encoder, display, and integration with the KODI RPC API to show
+            playback state without needing a TV.
+          </div>
+          <div class="item-footer">
+            <span class="pill pill-tag">linux</span>
+            <span class="pill pill-tag">kodi</span>
+            <span class="pill pill-tag">ui</span>
+            <span class="link-inline">
+              <a href="https://github.com/SerialSniffyHeck3r/KODI-Mediabox-LCD-Ctrl-Pi" target="_blank" rel="noreferrer">
+                View on GitHub
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M6.75 3a.75.75 0 0 0 0 1.5h3.19L4.22 10.22a.75.75 0 1 0 1.06 1.06L11 5.56v3.19a.75.75 0 0 0 1.5 0V3.75A.75.75 0 0 0 11.75 3h-5z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M3.5 4A1.5 1.5 0 0 0 2 5.5v7A.25.25 0 0 1 3.5 13h7a.25.25 0 0 1 .25.25V9a.75.75 0 0 0-1.5 0v3.25a.25.25 0 0 1-.25.25h-7A.25.25 0 0 1 3.5 4z"
+                  />
+                </svg>
+              </a>
+            </span>
+          </div>
+        </article>
+
+        <!-- Minor 예시 -->
+        <article class="item">
+          <header class="item-header">
+            <h3 class="item-title">
+              Smaller experiments and throwaway tools
+            </h3>
+            <span class="pill pill-minor">Minor</span>
+          </header>
+          <div class="item-meta">
+            Misc · Prototypes · One-off utilities
+          </div>
+          <div class="item-body">
+            Assorted prototypes and lab tools that were useful at the time but
+            are less polished. Kept mostly as engineering notes and references.
+          </div>
+          <div class="item-footer">
+            <span class="pill pill-tag">prototypes</span>
+            <span class="pill pill-tag">utility</span>
+          </div>
+        </article>
       </div>
-
-      <!-- 나중에 프로젝트 더 추가하고 싶으면 아래 카드 복붙해서 내용만 바꾸면 됨 -->
-
     </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <div class="card">
-        <p>이메일: your.email@example.com</p>
-        <p>GitHub: <a href="https://github.com/SerialSniffyHeck3r">github.com/SerialSniffyHeck3r</a></p>
-        <p>관심 분야: 임베디드, 오디오, RTOS, 통신 프로토콜</p>
+    <!-- ===== 리서치 / 분석글 계층 구조 ===== -->
+    <section id="research">
+      <div class="section-label">Writing</div>
+      <h2 class="section-title">Research &amp; reverse-engineering notes</h2>
+      <p class="section-desc">
+        Longer writeups that dig into how specific systems work. Some are tied
+        to my projects, others are just curiosity about old hardware and weird
+        software behavior.
+      </p>
+
+      <div class="grid">
+        <!-- X-MEN 글 예시 -->
+        <article class="item">
+          <header class="item-header">
+            <h3 class="item-title">
+              SEGA X-MEN arcade – reset behavior and progress retention
+            </h3>
+            <span class="pill pill-major">Major</span>
+          </header>
+          <div class="item-meta">
+            68k assembly · Hardware reset line · State retention
+          </div>
+          <div class="item-body">
+            An investigation into how the X-MEN arcade game appears to “resume”
+            progress after a reset. Looks at the reset circuitry, RAM layout,
+            and 68k code paths that rebuild state.
+          </div>
+          <div class="item-footer">
+            <span class="pill pill-tag">arcade</span>
+            <span class="pill pill-tag">68k</span>
+            <span class="pill pill-tag">state machine</span>
+            <span class="link-inline">
+              <a href="/blog/xmen-reset-arcade.html">
+                Read article
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M6.75 3a.75.75 0 0 0 0 1.5h3.19L4.22 10.22a.75.75 0 1 0 1.06 1.06L11 5.56v3.19a.75.75 0 0 0 1.5 0V3.75A.75.75 0 0 0 11.75 3h-5z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M3.5 4A1.5 1.5 0 0 0 2 5.5v7A1.5 1.5 0 0 0 3.5 14h7a1.5 1.5 0 0 0 1.5-1.5V9a.75.75 0 0 0-1.5 0v3.25a.25.25 0 0 1-.25.25h-7A.25.25 0 0 1 3.5 4z"
+                  />
+                </svg>
+              </a>
+            </span>
+          </div>
+        </article>
+
+        <!-- Lowrance 글 예시 -->
+        <article class="item">
+          <header class="item-header">
+            <h3 class="item-title">
+              Exploring the Lowrance Endura GPS (Windows CE)
+            </h3>
+            <span class="pill pill-major">Major</span>
+          </header>
+          <div class="item-meta">
+            Filesystem layout · CE registry · Safe modifications
+          </div>
+          <div class="item-body">
+            A guided walk through the Endura’s filesystem and Windows CE
+            registry, including how to peek inside without bricking the device
+            and what can realistically be customized.
+          </div>
+          <div class="item-footer">
+            <span class="pill pill-tag">wince</span>
+            <span class="pill pill-tag">gps</span>
+            <span class="pill pill-tag">registry</span>
+            <span class="link-inline">
+              <a href="/blog/lowrance-endura-wince.html">
+                Read article
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M6.75 3a.75.75 0 0 0 0 1.5h3.19L4.22 10.22a.75.75 0 1 0 1.06 1.06L11 5.56v3.19a.75.75 0 0 0 1.5 0V3.75A.75.75 0 0 0 11.75 3h-5z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M3.5 4A1.5 1.5 0 0 0 2 5.5v7A1.5 1.5 0 0 0 3.5 14h7a1.5 1.5 0 0 0 1.5-1.5V9a.75.75 0 0 0-1.5 0v3.25a.25.25 0 0 1-.25.25h-7A.25.25 0 0 1 3.5 4z"
+                  />
+                </svg>
+              </a>
+            </span>
+          </div>
+        </article>
+
+        <!-- Minor 글 모음 예시 -->
+        <article class="item">
+          <header class="item-header">
+            <h3 class="item-title">
+              Smaller notes and one-page writeups
+            </h3>
+            <span class="pill pill-minor">Minor</span>
+          </header>
+          <div class="item-meta">
+            Short logs · Debug diaries · Partial analyses
+          </div>
+          <div class="item-body">
+            Shorter pieces that capture a specific problem or debugging story.
+            Useful as a reference for future me, and occasionally fun reading
+            for other people who enjoy weird edge cases.
+          </div>
+          <div class="item-footer">
+            <span class="pill pill-tag">notes</span>
+            <span class="pill pill-tag">debugging</span>
+          </div>
+        </article>
       </div>
     </section>
-  </main>
 
-  <footer>
-    © 2026. 울애기 포트폴리오.
-  </footer>
+    <!-- ===== 기타 / WIP ===== -->
+    <section id="misc">
+      <div class="section-label">Loose ends</div>
+      <h2 class="section-title">Currently in progress</h2>
+      <p class="section-desc">
+        Things I am actively working on or planning to clean up. These are not
+        ready as full “projects” yet, but they matter to where I want to go
+        next.
+      </p>
+
+      <div class="grid">
+        <article class="item">
+          <header class="item-header">
+            <h3 class="item-title">
+              Ongoing work – polishing the graduation firmware
+            </h3>
+            <span class="pill pill-minor">WIP</span>
+          </header>
+          <div class="item-meta">
+            Refactoring · Documentation · Better diagrams
+          </div>
+          <div class="item-body">
+            Cleaning up an admittedly messy but real-world firmware into
+            something that would make sense to read in a code review – smaller
+            modules, clearer state machine, and architecture notes.
+          </div>
+          <div class="item-footer">
+            <span class="pill pill-tag">refactor</span>
+            <span class="pill pill-tag">firmware</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== 푸터 ===== -->
+    <footer>
+      <div>
+        © <span id="year"></span> SerialSniffyHeck3r. All hardware errors are my own.
+      </div>
+      <div>
+        <a href="https://github.com/SerialSniffyHeck3r" target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // 푸터 년도 자동 업데이트
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
