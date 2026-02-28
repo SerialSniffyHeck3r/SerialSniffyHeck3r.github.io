@@ -2,38 +2,155 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>울애기의 블로그 💗</title>
+  <title>울애기 포트폴리오 - 임베디드 & 음향기기</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #fff0f5;
-      color: #333;
-      text-align: center;
-      padding: 3rem;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
     }
-    h1 {
-      font-size: 3rem;
-      color: #ff69b4;
+
+    header {
+      padding: 2rem 10%;
+      background: #020617;
+      border-bottom: 1px solid #1f2937;
     }
-    p {
-      font-size: 1.3rem;
-      margin-top: 1rem;
-    }
-    .heart {
+
+    .title {
       font-size: 2rem;
-      animation: bounce 1.2s infinite;
+      font-weight: 700;
     }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+
+    .subtitle {
+      margin-top: 0.5rem;
+      color: #9ca3af;
+    }
+
+    main {
+      padding: 2rem 10%;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      border-left: 4px solid #38bdf8;
+      padding-left: 0.5rem;
+    }
+
+    .card {
+      border: 1px solid #1f2937;
+      border-radius: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      background: #020617;
+      margin-bottom: 1rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid #374151;
+      font-size: 0.75rem;
+      margin-right: 0.25rem;
+      margin-top: 0.25rem;
+      color: #9ca3af;
+    }
+
+    .project-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-meta {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 1.5rem 10%;
+      border-top: 1px solid #1f2937;
+      font-size: 0.85rem;
+      color: #6b7280;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>🐇 울애기의 블로그에 온 걸 환영해! 💕</h1>
-  <p>깡총깡총~ 여긴 내 깃헙 블로그야!<br>기록하고, 끄적이고, 사랑을 담는 공간이야 ✨</p>
-  <p class="heart">💗💗💗</p>
-  <p>👉 더 많은 글은 <code>_posts</code> 폴더에서 만나봐!</p>
+  <header>
+    <div class="title">울애기 포트폴리오</div>
+    <div class="subtitle">임베디드 · 음향기기 설계 · 졸업 작품</div>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>소개</h2>
+      <div class="card">
+        <p>임베디드 시스템, 펌웨어, 그리고 음향기기 설계를 좋아하는 개발자입니다.</p>
+        <p>주로 C/C++, MCU, RTOS, 통신 프로토콜, 오디오 신호 처리 쪽을 다룹니다.</p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>프로젝트</h2>
+
+      <div class="card">
+        <div class="project-title">졸업 작품 - OO 음향기기 설계</div>
+        <div class="project-meta">
+          기간: 2024.03 ~ 2024.11 · 역할: 시스템 설계 / 하드웨어 / 펌웨어
+        </div>
+        <p>
+          실시간 DSP 기반의 OO용 휴대용 음향기기 설계 및 구현 프로젝트입니다.
+          오디오 코덱, 앰프, 블루투스 모듈을 사용해 하드웨어를 구성하고,
+          MCU 펌웨어에서 실시간 오디오 처리, 제어 로직을 구현했습니다.
+        </p>
+        <p>
+          - 주요 기술: C, RTOS, I2S, I2C, SPI, 오디오 DSP<br>
+          - 하드웨어: MCU, Audio Codec, Class-D Amp, Bluetooth Module 등
+        </p>
+        <p>
+          ▶ GitHub 레포: <a href="https://github.com/SerialSniffyHeck3r/레포이름-여기-나중에-수정">바로가기</a>
+        </p>
+        <div>
+          <span class="tag">Embedded</span>
+          <span class="tag">Audio</span>
+          <span class="tag">Firmware</span>
+          <span class="tag">Hardware</span>
+        </div>
+      </div>
+
+      <!-- 나중에 프로젝트 더 추가하고 싶으면 아래 카드 복붙해서 내용만 바꾸면 됨 -->
+
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>이메일: your.email@example.com</p>
+        <p>GitHub: <a href="https://github.com/SerialSniffyHeck3r">github.com/SerialSniffyHeck3r</a></p>
+        <p>관심 분야: 임베디드, 오디오, RTOS, 통신 프로토콜</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026. 울애기 포트폴리오.
+  </footer>
 </body>
 </html>
