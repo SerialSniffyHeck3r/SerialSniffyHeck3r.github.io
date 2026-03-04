@@ -1270,12 +1270,12 @@
             </div>
             <p class="project-summary lang lang-ko">
               Lowrance Endura GPS 내부의 레지스트리, 파일 시스템, 부트 구조를
-              단계적으로 파헤치면서 “어디까지 건드리면 안전한가”를 실험한 프로젝트입니다.
+              단계적으로 파헤치면서 GPS 기기 내부를 역공학한 프로젝트입니다.
             </p>
             <p class="project-summary lang lang-en">
               A guided exploration of the Lowrance Endura GPS internals:
               registry, filesystem, and boot flow, with a focus on how far you can
-              push customization before the device stops booting.
+              push customization. 
             </p>
             <ul class="meta-chips">
               <li class="meta-chip lang lang-ko">Windows CE · 레지스트리 · 펌웨어 탐색</li>
@@ -1350,34 +1350,33 @@
         <div class="about-layout">
           <div class="about-main">
             <p class="lang lang-ko">
-              새로운 하드웨어를 만들 때마다 “실제 사람이 쓸 수 있는지”와
-              “필드에서 디버깅이 얼마나 괴로운지”를 같이 생각합니다.
+              새로운 하드웨어를 만들 때마다 “체계적인 개발이 가능한지”와
+              “실제 제품의 엔드 유저는 어떻게 느낄지”를 같이 생각합니다.
               이 사이트는 그런 고민의 결과물들을 한 곳에 모아 둔 인덱스이자,
               나중에 다시 읽을 수 있는 개발 일지 역할을 합니다.
             </p>
             <p class="lang lang-en">
-              Whenever I build hardware, I think about both whether someone can
-              realistically use it and how painful it will be to debug in the field.
+              Whenever I build hardware, I think about both whether systemical development is possible, and use it and how end users feel the system.
               This site is an index of those experiments and the notes I wish I’d
               had earlier.
             </p>
 
             <p class="lang lang-ko">
               최근에는 졸업 작품인 TUNION 펌웨어를 정리하고, 리버스 엔지니어링 관련 글들을
-              읽기 좋은 글 형태로 옮기는 작업을 진행 중입니다.
+              읽기 좋은 글 형태로 옮기는 작업을 진행했습니다.
             </p>
             <p class="lang lang-en">
-              Lately I’ve been cleaning up the TUNION firmware and turning my
+              Lately I’ve done cleaning up the TUNION firmware and turning my
               reverse‑engineering notes into more readable, article‑style posts.
             </p>
 
             <ul class="about-list lang lang-ko">
-              <li>관심 키워드: 임베디드 시스템, 오디오 DSP, 레트로 하드웨어, 실사용 보안 설계</li>
+              <li>관심 키워드: 임베디드 시스템, 오디오 DSP, 레트로 하드웨어, 임베디드 보안</li>
               <li>좋아하는 작업: 실제 장비를 분해하고, 온전한 상태로 다시 조립해서 쓰는 것</li>
               <li>목표: “읽기 좋은 펌웨어”와 “현실적인 보안 설계”를 같이 가져가는 것</li>
             </ul>
             <ul class="about-list lang lang-en">
-              <li>Keywords: embedded systems, audio DSP, retro hardware, practical security design</li>
+              <li>Keywords: embedded systems, audio DSP, retro hardware, embedded security design</li>
               <li>Things I enjoy: taking real devices apart and putting them back into service, cleaner than before</li>
               <li>Goal: firmware that’s pleasant to read and security that actually fits the hardware</li>
             </ul>
@@ -1389,13 +1388,13 @@
 
             <ul class="about-list lang lang-ko">
               <li>MCU: STM32, TMS320, Raspberry Pi (bare-metal 느낌 선호)</li>
-              <li>언어: C 중심, 필요하면 약간의 Python / Shell</li>
-              <li>툴: Logic analyzer, 오실로스코프, JTAG 디버거</li>
+              <li>언어: C(Embedded C), VHDL (초급) , Assembly (기초)</li>
+              <li>툴: Logic analyzer, Agilent 54622 오실로스코프, ST-Link, J-Link </li>
             </ul>
             <ul class="about-list lang lang-en">
               <li>MCUs: STM32, TMS320, Raspberry Pi (closer to bare‑metal when possible)</li>
-              <li>Languages: C first, plus a bit of Python / shell when useful</li>
-              <li>Tools: Logic analyzers, oscilloscopes, JTAG debuggers</li>
+              <li>Languages: Embedded C, VHDL, Assembly </li>
+              <li>Tools: Logic analyzers, Agilent 54622D Series oscilloscopes, ST-Link, J-Link</li>
             </ul>
 
             <h3 class="lang lang-ko">Contact</h3>
@@ -1526,3 +1525,4 @@
   </script>
 </body>
 </html>
+
